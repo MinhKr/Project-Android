@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".LoginActivity"
+    tools:context=".SetInfoActivity"
     >
 
     <RelativeLayout
@@ -36,39 +36,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/welcome"
+                android:text="Nhập thông tin"
                 android:textColor="#FFFFFF"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.7"
-                android:text="Nhập thông tin"
-                android:textColor="#FFFFFF"
-                />
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.7"
-                android:text="@string/prompt_phone"
-                android:textColor="#BFBFBF"
-                android:textStyle="bold"
-                />
+
 
             <EditText
-                android:id="@+id/input_txt_phonenumber"
+                android:id="@+id/input_txt_setName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
+                android:height="50dp"
+                android:ems="10"
+                android:textColorHint="#AAA3B8"
+                android:background="@drawable/input_text_bg"
+                android:hint="Nhập tên của bạn"
+                android:textAlignment="center"
                 />
 
             <View
@@ -76,43 +68,45 @@
                 android:layout_height="20dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.7"
-                android:text="@string/prompt_password"
-                android:textColor="#BFBFBF"
-                android:textStyle="bold"
-                />
-
-            <EditText
-                android:id="@+id/input_txt_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 >
-
-                <CheckBox
+                <TextView
+                    android:id="@+id/txt_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:alpha="0.7"
-                    android:text="Ghi nhớ"
+                    android:text="Nam"
+                    android:textSize="20dp"
                     android:textColor="@color/white"
                     />
 
                 <TextView
+                    android:id="@+id/txt_fermale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Nữ"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"
+                    android:textSize="20dp"
+                    />
+
+
+
+                <TextView
+                    android:id="@+id/txt_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="Quên mật khẩu"
+                    android:text="Khác"
                     android:textColor="@color/white"
+                    android:textSize="20dp"
                     />
 
             </RelativeLayout>
@@ -123,28 +117,17 @@
                 />
 
             <com.google.android.material.button.MaterialButton
-                android:layout_width="250dp"
+                android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="50dp"
                 android:background="@drawable/gradient_bg_button"
                 android:gravity="center"
-                android:text="Đăng nhập"
+                android:text="Tiếp tục"
                 app:backgroundTint="@null"
-                app:cornerRadius="32dp"
-                />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:alpha="0.7"
-                android:text="Đăng kí"
-                android:textColor="@color/white"
+                app:cornerRadius="20dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
                 />
 
 
@@ -152,6 +135,5 @@
 
 
     </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>
