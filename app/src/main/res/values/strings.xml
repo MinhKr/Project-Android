@@ -4,8 +4,12 @@
     <string name="prompt_phone">Số điện thoại</string>
     <string name="prompt_password">Mật khẩu</string>
     <string name="action_sign_in">Đăng nhập</string>
-    <string name="welcome">"Đăng nhập"</string>
+    <string name="login">"Đăng Nhập"</string>
+    <string name="signIn">Đăng Kí</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="male_gender">Male Gender Icon</string>
+    <string name="female_gender">Female Gender Icon</string>
+    <string name="other_gender">Other Gender Icon</string>
 </resources>
