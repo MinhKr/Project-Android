@@ -23,40 +23,27 @@
         app:cardCornerRadius="30dp">
 
         <LinearLayout
-<<<<<<< HEAD
-
-=======
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
             android:layout_width="match_parent"
             android:layout_height="459dp"
             android:background="@color/black"
             android:orientation="vertical"
-<<<<<<< HEAD
             android:padding="28dp"
             >
-=======
-            android:padding="28dp">
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/signIn"
                 android:textColor="#FFFFFF"
                 android:textSize="32sp"
-<<<<<<< HEAD
                 android:textStyle="bold"
                 />
-=======
-                android:textStyle="bold" />
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.8"
                 android:text="Nhập thông tin"
-<<<<<<< HEAD
                 android:textColor="#FFFFFF"
                 />
 
@@ -64,13 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 />
-=======
-                android:textColor="#FFFFFF" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,7 +59,7 @@
                 android:alpha="0.7"
                 android:text="@string/prompt_phone"
                 android:textColor="#BFBFBF"
-<<<<<<< HEAD
+
                 android:textStyle="bold"
                 />
             <LinearLayout
@@ -108,20 +89,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 />
-=======
-                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/input_txt_phonenumber"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:textColor="@color/white"
-                android:hint="Nhập số điện thoại của bạn" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,18 +98,13 @@
                 android:alpha="0.7"
                 android:text="@string/prompt_password"
                 android:textColor="#BFBFBF"
-<<<<<<< HEAD
                 android:textStyle="bold"
                 />
-=======
-                android:textStyle="bold" />
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
 
             <EditText
                 android:id="@+id/input_txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-<<<<<<< HEAD
                 android:hint="Nhập mật khẩu của bạn"
                 android:textColor="@color/white"
                 />
@@ -149,14 +113,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 />
-=======
-                android:textColor="@color/white"
-                android:hint="Nhập mật khẩu của bạn" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
 
             <TextView
                 android:layout_width="wrap_content"
@@ -164,18 +120,14 @@
                 android:alpha="0.7"
                 android:text="Nhập lại mật khẩu"
                 android:textColor="#BFBFBF"
-<<<<<<< HEAD
                 android:textStyle="bold"
                 />
-=======
-                android:textStyle="bold" />
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
+
 
             <EditText
                 android:id="@+id/reInput_txt_password"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-<<<<<<< HEAD
                 android:hint="Nhập lại mật khẩu của bạn"
                 android:textColor="@color/white"
                 />
@@ -187,47 +139,20 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/register_btn"
-=======
                 android:textColor="@color/white"
-                android:hint="Nhập lại mật khẩu của bạn" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <com.google.android.material.button.MaterialButton
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/gradient_bg_button"
-<<<<<<< HEAD
                 android:contentDescription="Nút đăng nhập"
-=======
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
                 android:gravity="center"
                 android:text="@string/signIn"
                 app:backgroundTint="@null"
-                app:cornerRadius="32dp"
-<<<<<<< HEAD
-                />
+                app:cornerRadius="32dp"/>
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                />
 
             <TextView
                 android:id="@+id/txt_exist_acc"
-=======
-                android:contentDescription="Nút đăng nhập" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <TextView
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -237,17 +162,8 @@
                 />
 
 
-<<<<<<< HEAD
-        </LinearLayout
-            >
-
-    </androidx.cardview.widget.CardView>
-
-
-=======
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
->>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
 </RelativeLayout>
