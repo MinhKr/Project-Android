@@ -1,5 +1,6 @@
 package com.example.map_chat_app;
 
+<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+=======
+import android.os.Bundle;
+>>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+<<<<<<< HEAD
 import com.hbb20.CountryCodePicker;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -22,11 +27,16 @@ public class RegisterActivity extends AppCompatActivity {
     EditText phoneInput;
     CountryCodePicker countryCodePicker;
     Button registerBtn;
+=======
+public class RegisterActivity extends AppCompatActivity {
+
+>>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
+<<<<<<< HEAD
 
         phoneInput = findViewById(R.id.input_txt_phonenumber);
         countryCodePicker = findViewById(R.id.ccp_register);
@@ -58,6 +68,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
             Intent intent = new Intent(RegisterActivity.this , LoginActivity.class);
             startActivity(intent);
+=======
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+>>>>>>> 4d450d8a8c8140babb1d9bd11a01fa08033f18c1
         });
     }
 }
