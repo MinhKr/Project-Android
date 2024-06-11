@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -21,7 +22,8 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button btn_login;
+    Button btn_login;
+    TextView toRegisterActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         btn_login = (Button)findViewById(R.id.btn_login);
+        toRegisterActivity = findViewById((R.id.createAcc_txt));
         /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -38,13 +41,18 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Register Successfully", Toast.LENGTH_SHORT).show();
 
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        toRegisterActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("LoginScreen", "Button SignIn clicked!");
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
             }
+        });
+
+        btn_login.setOnClickListener((v) -> {
+            Intent intent = new Intent(LoginActivity.this , SetInfoActivity.class);
+            startActivity(intent);
         });
     }
 
