@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "769271468007",
+    "firebase_url": "https://socialmapapp-86505-default-rtdb.firebaseio.com",
+    "project_id": "socialmapapp-86505",
+    "storage_bucket": "socialmapapp-86505.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769271468007:android:2b83e2b57ecfc37525b742",
+        "android_client_info": {
+          "package_name": "com.example.map_chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfrSvTtqaJErN2YFNVeG78cDLzQ62fCy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

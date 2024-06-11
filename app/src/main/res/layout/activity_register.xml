@@ -6,15 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".LoginActivity"
-    >
+    tools:context=".LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.6"
-        android:background="#6A6770"
-        />
+        android:background="#6A6770" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
@@ -22,8 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-20dp"
-        app:cardCornerRadius="30dp"
-        >
+        app:cardCornerRadius="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,28 +29,29 @@
             android:orientation="vertical"
             android:padding="28dp"
             >
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/login"
+                android:text="@string/signIn"
                 android:textColor="#FFFFFF"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 />
 
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.7"
+                android:alpha="0.8"
                 android:text="Nhập thông tin"
                 android:textColor="#FFFFFF"
                 />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="10dp"
                 />
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,35 +59,39 @@
                 android:alpha="0.7"
                 android:text="@string/prompt_phone"
                 android:textColor="#BFBFBF"
+
                 android:textStyle="bold"
                 />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/ccp_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:ccp_defaultNameCode="VN"
-                app:ccp_showNameCode="false"
-                app:ccp_contentColor="@color/white"/>
-
-            <EditText
-                android:id="@+id/input_txt_phonenumber"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ccp_defaultNameCode="VN"
+                    app:ccp_showNameCode="false"
+                    app:ccp_contentColor="@color/white"/>
+
+                <EditText
+                    android:id="@+id/input_txt_phonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Nhập số điện thoại của bạn"
+                    android:textColor="@color/white"
+                    />
+            </LinearLayout>
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 />
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,34 +105,33 @@
             <EditText
                 android:id="@+id/input_txt_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
+                android:hint="Nhập mật khẩu của bạn"
                 android:textColor="@color/white"
                 />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                >
+                android:alpha="0.7"
+                android:text="Nhập lại mật khẩu"
+                android:textColor="#BFBFBF"
+                android:textStyle="bold"
+                />
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:alpha="0.7"
-                    android:text="Ghi nhớ"
-                    android:textColor="@color/white"
-                    />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:text="Quên mật khẩu"
-                    android:textColor="@color/white"
-                    />
-
-            </RelativeLayout>
+            <EditText
+                android:id="@+id/reInput_txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Nhập lại mật khẩu của bạn"
+                android:textColor="@color/white"
+                />
 
             <View
                 android:layout_width="wrap_content"
@@ -138,37 +139,32 @@
                 />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_login"
+                android:id="@+id/register_btn"
+                android:textColor="@color/white"
                 android:layout_width="250dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/gradient_bg_button"
+                android:contentDescription="Nút đăng nhập"
                 android:gravity="center"
-                android:text="Đăng nhập"
+                android:text="@string/signIn"
                 app:backgroundTint="@null"
-                app:cornerRadius="32dp"
-                />
+                app:cornerRadius="32dp"/>
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp"
-                />
 
             <TextView
-                android:id="@+id/createAcc_txt"
+                android:id="@+id/txt_exist_acc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:alpha="0.8"
-                android:text="Tạo tài khoản mới"
+                android:text="Đã có tài khoản"
                 android:textColor="@color/white"
                 />
 
 
         </LinearLayout>
 
-
     </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>
