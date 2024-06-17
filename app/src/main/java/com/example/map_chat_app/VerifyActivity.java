@@ -33,7 +33,7 @@ public class VerifyActivity extends AppCompatActivity {
     Button verifyBtn;
     FirebaseAuth mAuth;
 
-    String verificationId, phoneNumber, password;
+    String verificationId, phoneNumber, password , email , phoneNumberNoCountryCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,9 @@ public class VerifyActivity extends AppCompatActivity {
 
         verificationId = getIntent().getStringExtra("verificationId");
         phoneNumber = getIntent().getStringExtra("phoneNumber");
+        phoneNumberNoCountryCode = getIntent().getStringExtra("phoneNumberNoCountryCode");
         password = getIntent().getStringExtra("password");
+        email = getIntent().getStringExtra("email");
 
         SendOTP(phoneNumber , false);
 
@@ -107,7 +109,14 @@ public class VerifyActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Sign in success
                         FirebaseUser user = task.getResult().getUser();
-                        Intent intent = new Intent(VerifyActivity.this, LoginActivity.class);
+
+                        Toast.makeText(VerifyActivity.this, "Xác minh thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(VerifyActivity.this, SetInfoActivity.class);
+                        intent.putExtra("userId", user.getUid());
+                        intent.putExtra("phoneNumber", phoneNumber);
+                        intent.putExtra("phoneNumberNoCountryCode", phoneNumberNoCountryCode);
+                        intent.putExtra("password", password);
+
                         startActivity(intent);
                         finish();
                     } else {
@@ -115,6 +124,5 @@ public class VerifyActivity extends AppCompatActivity {
                         Toast.makeText(VerifyActivity.this,"Xác minh thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });
-
     }
 }
