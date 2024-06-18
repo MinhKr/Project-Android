@@ -107,7 +107,7 @@ public class VerifyActivity extends AppCompatActivity {
         mAuth.signInWithCredential(phoneAuthCredential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Sign in success
+                        // Xác minh thành công
                         FirebaseUser user = task.getResult().getUser();
 
                         Toast.makeText(VerifyActivity.this, "Xác minh thành công", Toast.LENGTH_SHORT).show();
@@ -120,7 +120,7 @@ public class VerifyActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        // Sign in failed
+                        // Xác minh thất bại
                         Toast.makeText(VerifyActivity.this,"Xác minh thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });

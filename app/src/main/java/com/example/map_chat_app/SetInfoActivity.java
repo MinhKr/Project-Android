@@ -37,9 +37,26 @@ public class SetInfoActivity extends AppCompatActivity {
         String phoneNumberNoCountryCode = getIntent().getStringExtra("phoneNumberNoCountryCode").replace(" ", "");
         String password = getIntent().getStringExtra("password");
 
-        maleIB.setOnClickListener(v -> gender = "Nam");
-        fermaleIB.setOnClickListener(v -> gender = "Nữ");
-        otherGenderIB.setOnClickListener(v -> gender = "Khác");
+        maleIB.setOnClickListener(v -> {
+            gender = "Nam";
+            maleIB.setBackgroundResource(R.drawable.gender_bg_button_clicked);
+            fermaleIB.setBackgroundResource(R.drawable.gender_bg_btn);
+            otherGenderIB.setBackgroundResource(R.drawable.gender_bg_btn);
+        });
+
+        fermaleIB.setOnClickListener(v -> {
+            gender = "Nữ";
+            fermaleIB.setBackgroundResource(R.drawable.gender_bg_button_clicked);
+            maleIB.setBackgroundResource(R.drawable.gender_bg_btn);
+            otherGenderIB.setBackgroundResource(R.drawable.gender_bg_btn);
+        });
+
+        otherGenderIB.setOnClickListener(v -> {
+            gender = "Khác";
+            otherGenderIB.setBackgroundResource(R.drawable.gender_bg_button_clicked);
+            maleIB.setBackgroundResource(R.drawable.gender_bg_btn);
+            fermaleIB.setBackgroundResource(R.drawable.gender_bg_btn);
+        });
 
         nextBtn.setOnClickListener(v -> {
             // Get the user input
@@ -64,7 +81,9 @@ public class SetInfoActivity extends AppCompatActivity {
                             // Save the user to SQLite
                             dbHelper.addUser(userSQLite);
 
-                            startActivity(new Intent(SetInfoActivity.this, FindMeActivity.class));
+                            Intent intent = new Intent(SetInfoActivity.this, FindMeActivity.class);
+                            intent.putExtra("name", name);
+                            startActivity(intent);
                             Toast.makeText(SetInfoActivity.this, "Thông tin đã được lưu", Toast.LENGTH_SHORT).show();
 
                         } else {
