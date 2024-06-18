@@ -16,4 +16,12 @@ public class Friend {
     public int getAvatarResId() {
         return avatarResId;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAvatarResId(int avatarResId) {
+        this.avatarResId = avatarResId;
+    }
 }

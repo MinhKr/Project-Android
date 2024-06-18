@@ -1,0 +1,60 @@
+package com.example.map_chat_app.Adapter;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.map_chat_app.Model.Friend;
+import com.example.map_chat_app.R;
+
+import java.util.List;
+
+public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
+
+    private Context mContext;
+    private List<Friend> mFriends;
+
+    public ChatAdapter(Context mContext, List<Friend> mFriends){
+        this.mFriends = mFriends;
+        this.mContext = mContext;
+
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_chat_list,parent,false);
+        return new ChatAdapter.ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Friend friend = mFriends.get(position);
+        holder.username.setText(friend.getName());
+        holder.profile_image.setImageResource(friend.getAvatarResId());
+    }
+
+    @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView username;
+        public ImageView profile_image;
+
+        public ViewHolder(View itemView){
+            super(itemView);
+            username = itemView.findViewById(R.id.username);
+            profile_image = itemView.findViewById(R.id.profile_image);
+
+        }
+    }
+
+}

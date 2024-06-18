@@ -32,8 +32,9 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/back"
-                android:background="#00000"
+                android:background="#000000"
                 android:scaleType="centerCrop"
+                android:contentDescription="@string/back_button_desc"
                 />
             <SearchView
                 android:id="@+id/searchView"
@@ -44,6 +45,24 @@
                 android:background="@drawable/search_view_background"
                 android:layout_marginLeft="60dp"/>
         </FrameLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleviewFriendGroup"
+            android:layout_width="match_parent"
+            android:layout_height="520dp"
+            android:paddingTop="8dp"/>
+
+        <ImageButton
+            android:id="@+id/imageButton_next"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            app:srcCompat="@drawable/next"
+            android:background="#000000"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/back_button_desc"
+            android:layout_marginLeft="320dp"
+            android:layout_marginTop="30dp"
+            />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

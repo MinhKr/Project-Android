@@ -1,5 +1,6 @@
 package com.example.map_chat_app.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,59 +14,31 @@ import com.example.map_chat_app.Model.Friend; // Import Friend từ package chí
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendViewHolder> {
+public class FriendAdapter extends RecyclerView.Adapter<FriendViewHolder> {
 
-    private List<Friend> friendList;
-    private List<Friend> friendListFull;
+    Context context;
+    List<Friend> items;
 
-    public FriendAdapter(List<Friend> friendList) {
-        this.friendList = friendList;
-        this.friendListFull = new ArrayList<>(friendList);
+    public FriendAdapter(Context context, List<Friend> items) {
+        this.context = context;
+        this.items = items;
     }
 
     @NonNull
     @Override
     public FriendViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_friend_list, parent, false);
-        return new FriendViewHolder(itemView);
+        return new FriendViewHolder(LayoutInflater.from(context).inflate(R.layout.item_friend_list,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull FriendViewHolder holder, int position) {
-        Friend friend = friendList.get(position);
-        holder.imageViewAvatar.setImageResource(friend.getAvatarResId());
-        holder.textViewName.setText(friend.getName());
+        holder.textViewName.setText(items.get(position).getName());
+        holder.imageViewAvatar.setImageResource(items.get(position).getAvatarResId());
+
     }
 
     @Override
     public int getItemCount() {
-        return friendList.size();
-    }
-
-    public void filter(String text) {
-        friendList.clear();
-        if (text.isEmpty()) {
-            friendList.addAll(friendListFull);
-        } else {
-            text = text.toLowerCase();
-            for (Friend item : friendListFull) {
-                if (item.getName().toLowerCase().contains(text)) {
-                    friendList.add(item);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    static class FriendViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageViewAvatar;
-        TextView textViewName;
-
-        FriendViewHolder(@NonNull View itemView) {
-            super(itemView);
-            imageViewAvatar = itemView.findViewById(R.id.imageViewAvatar);
-            textViewName = itemView.findViewById(R.id.textViewName);
-        }
+        return items.size();
     }
 }

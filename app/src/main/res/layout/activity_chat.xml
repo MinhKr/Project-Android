@@ -22,18 +22,12 @@
             android:background="@drawable/search_view_background"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:text="Bạn bè"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            />
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleviewFriendSearch"
+            android:id="@+id/recycleviewChat"
             android:layout_width="match_parent"
-            android:layout_height="520dp" />
+            android:layout_height="550dp" />
 
         <LinearLayout
             android:id="@+id/sticky_layout"
