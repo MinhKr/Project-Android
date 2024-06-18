@@ -33,13 +33,13 @@ public class VerifyActivity extends AppCompatActivity {
     Button verifyBtn;
     FirebaseAuth mAuth;
 
-    String verificationId, phoneNumber, password;
+    String verificationId, phoneNumber, password , email , phoneNumberNoCountryCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_verify);
-/*        otpInput = findViewById(R.id.input_txt_otp);
+        otpInput = findViewById(R.id.input_txt_otp);
         verifyBtn = findViewById(R.id.verify_btn);
         resendOtpTxt = findViewById(R.id.resend_otp);
 
@@ -47,13 +47,29 @@ public class VerifyActivity extends AppCompatActivity {
 
         verificationId = getIntent().getStringExtra("verificationId");
         phoneNumber = getIntent().getStringExtra("phoneNumber");
+        phoneNumberNoCountryCode = getIntent().getStringExtra("phoneNumberNoCountryCode");
         password = getIntent().getStringExtra("password");
+        email = getIntent().getStringExtra("email");
 
-        SendOTP(phoneNumber , false);*/
+        SendOTP(phoneNumber , false);
+
+        verifyBtn.setOnClickListener(v -> {
+            String otp = otpInput.getText().toString();
+            if(otp.isEmpty()){
+                Toast.makeText(VerifyActivity.this,"Vui lòng nhập mã OTP", Toast.LENGTH_SHORT).show();
+            }else{
+                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCode, otp);
+                signIn(credential);
+            }
+        });
+
+        resendOtpTxt.setOnClickListener(v -> {
+            SendOTP(phoneNumber , true);
+        });
     }
 
-/*    void SendOTP(String phoneNumber , boolean isResend){
-        PhoneAuthOptions options =
+    void SendOTP(String phoneNumber , boolean isResend){
+        PhoneAuthOptions.Builder optionsBuilder =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber(phoneNumber)       // Phone number to verify
                         .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
@@ -77,13 +93,36 @@ public class VerifyActivity extends AppCompatActivity {
                                 resendingToken = forceResendingToken;
                                 Toast.makeText(VerifyActivity.this,"Mã OTP đã được gửi", Toast.LENGTH_SHORT).show();
                             }
-                        })          // OnVerificationStateChangedCallbacks
-                        .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-    }*/
+                        });          // OnVerificationStateChangedCallbacks
 
-/*    void signIn(PhoneAuthCredential phoneAuthCredential){
+        if (isResend) {
+            optionsBuilder.setForceResendingToken(resendingToken); // Resend the OTP
+        }
+
+        PhoneAuthProvider.verifyPhoneNumber(optionsBuilder.build());
+    }
+
+    void signIn(PhoneAuthCredential phoneAuthCredential){
         //Login
+        mAuth.signInWithCredential(phoneAuthCredential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Xác minh thành công
+                        FirebaseUser user = task.getResult().getUser();
 
-    }*/
+                        Toast.makeText(VerifyActivity.this, "Xác minh thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(VerifyActivity.this, SetInfoActivity.class);
+                        intent.putExtra("userId", user.getUid());
+                        intent.putExtra("phoneNumber", phoneNumber);
+                        intent.putExtra("phoneNumberNoCountryCode", phoneNumberNoCountryCode);
+                        intent.putExtra("password", password);
+
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        // Xác minh thất bại
+                        Toast.makeText(VerifyActivity.this,"Xác minh thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }

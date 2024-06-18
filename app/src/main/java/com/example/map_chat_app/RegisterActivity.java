@@ -1,9 +1,13 @@
 package com.example.map_chat_app;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,10 +48,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
-    String passWord , rePassword , phoneNumber;
+    String passWord , rePassword , phoneNumber , phoneNumberNoCountryCode;
     String verificationId;
     DatabaseReference databaseReference;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,11 +71,55 @@ public class RegisterActivity extends AppCompatActivity {
         reInputPassword = findViewById(R.id.reInput_txt_password);
 
 
+        //Ẩn hiện mật khẩu
+        inputPassword.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if(event.getRawX() >= (inputPassword.getRight() - inputPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    // toggle password visibility
+                    if (inputPassword.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+                        // Show password
+                        inputPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    } else {
+                        // Hide password
+                        inputPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                    // Keep the cursor at the end of the text
+                    inputPassword.setSelection(inputPassword.getText().length());
+                    return true;
+                }
+            }
+            return false;
+        });
+
+        //Ẩn hiện mật khẩu
+        reInputPassword.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if(event.getRawX() >= (reInputPassword.getRight() - reInputPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    // toggle password visibility
+                    if (reInputPassword.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+                        // Show password
+                        reInputPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    } else {
+                        // Hide password
+                        reInputPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                    // Keep the cursor at the end of the text
+                    reInputPassword.setSelection(reInputPassword.getText().length());
+                    return true;
+                }
+            }
+            return false;
+        });
+
+
         //Quay trở lại đăng nhập nếu đã có tài khoản
         text_existAccout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Register has already have", "TextView clicked!");
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                 startActivity(intent);
             }
@@ -80,9 +129,25 @@ public class RegisterActivity extends AppCompatActivity {
         //Ấn nút Đăng kí
         registerBtn.setOnClickListener((v) -> {
             if (CheckPhoneNumber() && CheckPassword()) {
-                Intent intent = new Intent(RegisterActivity.this, VerifyActivity.class);
-                intent.putExtra("phoneNumber", countryCodePicker.getFullNumberWithPlus());
-                startActivity(intent);
+                phoneNumber = countryCodePicker.getFullNumberWithPlus();
+                phoneNumberNoCountryCode = phoneInput.getText().toString().replace(" ", "");// Lưu sđt không mã quốc gia , không dấu cách
+                passWord = inputPassword.getText().toString();
+
+                DBHelper dbHelper = new DBHelper(this);
+                UserSQLite existingUser = dbHelper.getUser(phoneNumberNoCountryCode);
+
+                //Kiểm tra người dùng đã tồn tại chưa
+                if (existingUser != null) {
+                    // Rồi
+                    Toast.makeText(this, "Số điện thoại đã tồn tại", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Chưa
+                    Intent intent = new Intent(RegisterActivity.this, VerifyActivity.class);
+                    intent.putExtra("phoneNumber", phoneNumber);
+                    intent.putExtra("phoneNumberNoCountryCode", phoneNumberNoCountryCode);
+                    intent.putExtra("password", passWord);
+                    startActivity(intent);
+                }
             }
         });
     }
