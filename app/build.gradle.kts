@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.database)
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.ads)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
