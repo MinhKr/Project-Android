@@ -1,6 +1,7 @@
 package com.example.map_chat_app.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.map_chat_app.Activity.MessageActivity;
 import com.example.map_chat_app.Model.Friend;
 import com.example.map_chat_app.R;
 
@@ -38,6 +40,14 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         Friend friend = mFriends.get(position);
         holder.username.setText(friend.getName());
         holder.profile_image.setImageResource(friend.getAvatarResId());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Intent intent = new Intent(mContext, MessageActivity.class);
+                intent.putExtra("userid", friend.getId());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
