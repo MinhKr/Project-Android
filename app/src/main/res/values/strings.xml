@@ -12,4 +12,5 @@
     <string name="male_gender">Male Gender Icon</string>
     <string name="female_gender">Female Gender Icon</string>
     <string name="other_gender">Other Gender Icon</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoia3Jvb25pODgiLCJhIjoiY2x4bjkwaHJzMDE1MzJsbjFkbHB6cXF2aiJ9.1nGeec8I2cPd8yf523nYlw</string>
 </resources>
