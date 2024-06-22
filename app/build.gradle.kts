@@ -50,7 +50,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation(libs.play.services.maps)
-    implementation(libs.play.services.ads)
+    implementation("com.mapbox.maps:android:11.4.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
