@@ -129,12 +129,13 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/onReturn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bản đồ"
+            android:text="Trở lại"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="italic" />
     </LinearLayout>
 
 </LinearLayout>

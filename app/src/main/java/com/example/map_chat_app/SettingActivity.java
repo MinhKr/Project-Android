@@ -3,6 +3,7 @@ import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ public class SettingActivity extends AppCompatActivity {
     private RadioButton themeLight;
     private RadioButton themeDark;
 
+    private TextView onReturn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,12 @@ public class SettingActivity extends AppCompatActivity {
                 Toast.makeText(this, "Chủ đề: Tối", Toast.LENGTH_SHORT).show();
                 setTheme(R.style.DarkTheme);
             }
+        });
+
+        onReturn = findViewById(R.id.onReturn);
+        onReturn.setOnClickListener(v -> {
+            // Quay lại MainActivity
+            finish();
         });
     }
 }
