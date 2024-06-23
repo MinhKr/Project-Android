@@ -6,269 +6,119 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/homepage"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Tin nhắn"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
+            <TextView
+                android:id="@+id/homepage"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="13dp"
-                android:layout_marginEnd="13dp"
-                android:background="@drawable/rounded_edit_text"
-                android:hint="Tm kiếm"
-                android:paddingLeft="70dp" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Mạng xã hội"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"
-                app:srcCompat="@drawable/search" />
-        </FrameLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+            <TableLayout
+                android:id="@+id/up_post"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:stretchColumns="*">
 
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:background="@drawable/rounded_edit_text"
-                            app:srcCompat="@drawable/addfriend" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/imageView4"
-                                android:layout_width="55dp"
-                                android:layout_height="55dp"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/avt_2" />
-
-                            <TextView
-                                android:id="@+id/textView4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Spider"
-                                android:textColor="@color/white"
-                                android:textSize="20dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/imageView5"
-                                android:layout_width="55dp"
-                                android:layout_height="55dp"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/avt_3" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Pool"
-                                android:textColor="@color/white"
-                                android:textSize="20dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/imageView3"
-                                android:layout_width="55dp"
-                                android:layout_height="55dp"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/avt" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Bat"
-                                android:textColor="@color/white"
-                                android:textSize="20dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </ScrollView>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="30dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="30dp">
 
-                    <LinearLayout
+                    <ImageView
+                        android:id="@+id/avt"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:background="@drawable/avt"
+                        android:clickable="false"
+                        android:scaleType="centerCrop" />
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="10dp"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/imageView7"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_marginRight="15dp"
-                            app:srcCompat="@drawable/avt_3" />
-
-                        <LinearLayout
+                        <EditText
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="DP"
-                                android:textColor="@color/white"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/textView6"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Content"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView8"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_marginRight="15dp"
-                            app:srcCompat="@drawable/avt" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView7"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Batman"
-                                android:textColor="@color/white"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Content"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="10dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:id="@+id/imageView9"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:layout_marginRight="15dp"
-                            app:srcCompat="@drawable/avt_2" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/textView9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Spiderman"
-                                android:textColor="@color/white"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/textView10"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center_vertical"
-                                android:text="Content"
-                                android:textColor="@color/white"
-                                android:textSize="18sp" />
-                        </LinearLayout>
-                    </LinearLayout>
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginVertical="10dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/rounded_edit_text"
+                            android:hint="Bạn đang nghĩ gì?"
+                            android:padding="10dp" />
+                    </RelativeLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+
+
+            </TableLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleviewPost"
+                android:layout_width="match_parent"
+                android:layout_height="520dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/sticky_layout"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/nav_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edit_text"
+                android:padding="10dp"
+                app:srcCompat="@drawable/nav_social" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edit_text"
+                android:padding="10dp"
+                app:srcCompat="@drawable/nav_main" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edit_text"
+                android:padding="10dp"
+                app:srcCompat="@drawable/nav_chat" />
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

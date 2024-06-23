@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:id="@+id/post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/post_bg"
+        android:orientation="vertical"
+        android:paddingBottom="15dp">
+
+        <LinearLayout
+            android:id="@+id/info"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/avt_post"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/avt"
+                android:clickable="false"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/username_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="User"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/time_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="time" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/caption_post"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="5dp"
+            android:text="Caption"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/img_post"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:maxHeight="200dp"
+            tools:srcCompat="@drawable/pic" />
+
+        <LinearLayout
+            android:id="@+id/react"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/like_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/like" />
+
+            <TextView
+                android:id="@+id/like_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="5dp"
+                android:text="10" />
+
+            <ImageView
+                android:id="@+id/cmt_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="10dp"
+                app:srcCompat="@drawable/cmt_click" />
+
+            <TextView
+                android:id="@+id/cmt_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginLeft="5dp"
+                android:text="10" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
