@@ -1,6 +1,7 @@
+
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.googleGmsGoogleServices)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -46,6 +47,12 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
+    implementation("com.hbb20:ccp:2.5.1")
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.database)
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation(libs.play.services.maps)
+    implementation("com.mapbox.maps:android:11.4.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

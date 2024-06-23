@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".SetInfoActivity"
+
+    >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="1200dp"
+        android:alpha="0.6"
+        android:background="#6A6770"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-20dp"
+        app:cardCornerRadius="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="459dp"
+            android:background="@color/black"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhập thông tin"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"/>
+
+            <EditText
+                android:id="@+id/input_txt_setName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:height="50dp"
+                android:background="@drawable/input_text_bg"
+                android:ems="10"
+                android:hint="Nhập tên của bạn"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textColorHint="#AAA3B8"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp"
+                >
+
+                <ImageButton
+                    android:id="@+id/male_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/gender_bg_btn"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/male"
+                    android:contentDescription="@string/male_gender"
+                    />
+
+                <View
+                    android:layout_width="42dp"
+                    android:layout_height="20dp"/>
+                <ImageButton
+                    android:id="@+id/fermale_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/gender_bg_btn"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/fermale"
+                    android:contentDescription="@string/female_gender"
+                    />
+
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"/>
+                <ImageButton
+                    android:id="@+id/othergender_btn"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/gender_bg_btn"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/other_gender"
+                    android:contentDescription="@string/other_gender"
+                    />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <TextView
+                    android:id="@+id/txt_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="Nam"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:layout_marginStart="20dp"/>
+
+                <TextView
+                    android:id="@+id/txt_fermale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Nữ"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:layout_marginStart="150dp"/>
+
+                <TextView
+                    android:id="@+id/txt_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="Khác"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:layout_marginEnd="10dp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/next_btn"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/gradient_bg_button"
+                android:gravity="center"
+                android:text="Tiếp tục"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:backgroundTint="@null"
+                app:cornerRadius="20dp"
+                />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
