@@ -94,7 +94,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_edit_text"
                 android:padding="10dp"
-                app:srcCompat="@drawable/nav_social" />
+                app:srcCompat="@drawable/nav_social1" />
 
             <ImageView
                 android:id="@+id/toMain"
@@ -103,7 +103,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_edit_text"
                 android:padding="10dp"
-                app:srcCompat="@drawable/nav_main" />
+                app:srcCompat="@drawable/nav_main1" />
 
             <ImageView
                 android:id="@+id/toChat"
@@ -113,7 +113,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_edit_text"
                 android:padding="10dp"
-                app:srcCompat="@drawable/nav_chat" />
+                app:srcCompat="@drawable/nav_chat1" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
