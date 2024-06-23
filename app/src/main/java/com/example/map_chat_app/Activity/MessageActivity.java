@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.map_chat_app.Model.Friend;
+import com.example.map_chat_app.Model.User;
 import com.example.map_chat_app.R;
 import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseApp;
@@ -48,7 +49,7 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         RecyclerView recyclerView = findViewById(R.id.recycleviewChat);
-        profile_image = findViewById(R.id.profile_image);
+//        profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);
 
         intent = getIntent();
@@ -65,9 +66,9 @@ public class MessageActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Friend friend = snapshot.getValue(Friend.class);
-                username.setText(friend.getName());
-                profile_image.setImageResource(R.mipmap.ic_launcher);
+                User user = snapshot.getValue(User.class);
+                username.setText(user.getName());
+//                profile_image.setImageResource(R.mipmap.ic_launcher);
             }
 
             @Override

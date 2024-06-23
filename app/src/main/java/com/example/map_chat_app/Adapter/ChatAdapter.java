@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.map_chat_app.Activity.MessageActivity;
 import com.example.map_chat_app.Model.Friend;
+import com.example.map_chat_app.Model.User;
 import com.example.map_chat_app.R;
 
 import java.util.List;
@@ -20,10 +21,10 @@ import java.util.List;
 public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<Friend> mFriends;
+    private List<User> mUsers;
 
-    public ChatAdapter(Context mContext, List<Friend> mFriends){
-        this.mFriends = mFriends;
+    public ChatAdapter(Context mContext, List<User> mUsers){
+        this.mUsers = mUsers;
         this.mContext = mContext;
 
     }
@@ -37,14 +38,14 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Friend friend = mFriends.get(position);
-        holder.username.setText(friend.getName());
-        holder.profile_image.setImageResource(friend.getAvatarResId());
+        User user = mUsers.get(position);
+        holder.username.setText(user.getName());
+//        holder.profile_image.setImageResource(user.getAvatarResId());
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", friend.getId());
+                intent.putExtra("userid", user.getUserId());
                 mContext.startActivity(intent);
             }
         });
@@ -62,7 +63,7 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         public ViewHolder(View itemView){
             super(itemView);
             username = itemView.findViewById(R.id.username);
-            profile_image = itemView.findViewById(R.id.profile_image);
+//            profile_image = itemView.findViewById(R.id.profile_image);
 
         }
     }
