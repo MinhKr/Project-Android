@@ -5,12 +5,12 @@
         android:width="37dp"
         android:height="37dp" />
 
-    <!-- Gradient background -->
-<!--    <gradient-->
-<!--        android:startColor="#FF5733"-->
-<!--        android:endColor="#FFC300"-->
-<!--        android:angle="45" />-->
-    <solid android:color="#000000" /> <!-- Điều chỉnh màu nền tại đây -->
+     Gradient background
+        <gradient
+            android:startColor="#E82AA8"
+            android:endColor="#2EEEE3"
+            android:angle="180" />
+<!--    <solid android:color="#000000" /> &lt;!&ndash; Điều chỉnh màu nền tại đây &ndash;&gt;-->
     <!-- Đường viền bo góc -->
     <corners
         android:radius="20dp" /> <!-- Điều chỉnh bán kính bo góc tại đây -->

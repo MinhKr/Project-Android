@@ -22,12 +22,18 @@
             android:background="@drawable/search_view_background"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"/>
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Bạn bè"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleviewChat"
+            android:id="@+id/recycleviewFriendSearch"
             android:layout_width="match_parent"
-            android:layout_height="550dp" />
+            android:layout_height="520dp" />
 
         <LinearLayout
             android:id="@+id/sticky_layout"
@@ -60,7 +66,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/rounded_edit_text"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/nav_main1" />
+                    app:srcCompat="@drawable/nav_main" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -69,7 +75,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/rounded_edit_text_gradient_bg"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/nav_chat1" />
+                    app:srcCompat="@drawable/nav_chat" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
