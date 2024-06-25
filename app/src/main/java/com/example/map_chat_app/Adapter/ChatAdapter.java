@@ -33,7 +33,7 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_chat_list,parent,false);
-        return new ChatAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
@@ -42,23 +42,20 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         holder.username.setText(user.getName());
 //        holder.profile_image.setImageResource(user.getAvatarResId());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("userid", user.getUserId());
-                mContext.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, MessageActivity.class);
+            intent.putExtra("userid", user.getUserId());
+            mContext.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mUsers.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView username;
-        public ImageView profile_image;
 
         public ViewHolder(View itemView){
             super(itemView);
