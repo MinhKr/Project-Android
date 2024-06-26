@@ -25,6 +25,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 
+import com.example.map_chat_app.Activity.MessageActivity;
 import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
@@ -115,7 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
             return false;
         });
 
-
+        setupPasswordVisibilityToggle(inputPassword);
+        setupPasswordVisibilityToggle(reInputPassword);
         //Quay trở lại đăng nhập nếu đã có tài khoản
         text_existAccout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,8 +154,42 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupPasswordVisibilityToggle(EditText editText) {
+        editText.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    if (editText.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
+                        editText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    } else {
+                        editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                    editText.setSelection(editText.getText().length());
+                    return true;
+                }
+            }
+            return false;
+        });
+    }
 
+    private void registerUser(String phoneNumber, String phoneNumberNoCountryCode, String password) {
+        mAuth.createUserWithEmailAndPassword(phoneNumberNoCountryCode, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        String userId = firebaseUser.getUid();
+                        User newUser = new User();
+                        databaseReference.child(userId).setValue(newUser);
 
+                        Intent intent = new Intent(RegisterActivity.this, MessageActivity.class);
+                        intent.putExtra("userid", userId);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
     private boolean CheckPhoneNumber() {
         countryCodePicker.registerCarrierNumberEditText(phoneInput);
         // Kiểm tra số điện thoại có hợp lệ không
@@ -191,4 +227,5 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+    
 }

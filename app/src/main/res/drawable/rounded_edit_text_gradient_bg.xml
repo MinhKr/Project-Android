@@ -5,7 +5,6 @@
         android:width="37dp"
         android:height="37dp" />
 
-     Gradient background
         <gradient
             android:startColor="#E82AA8"
             android:endColor="#2EEEE3"
