@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
+import android.util.Log;
 import android.preference.PreferenceManager;
 import android.widget.ImageView;
 import android.widget.Toast;
