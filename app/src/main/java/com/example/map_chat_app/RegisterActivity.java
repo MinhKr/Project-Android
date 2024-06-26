@@ -50,7 +50,6 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
     String passWord , rePassword , phoneNumber , phoneNumberNoCountryCode;
-    String verificationId;
     DatabaseReference databaseReference;
 
     @SuppressLint("ClickableViewAccessibility")

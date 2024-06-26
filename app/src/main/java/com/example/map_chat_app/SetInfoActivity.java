@@ -2,6 +2,7 @@ package com.example.map_chat_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SetInfoActivity extends AppCompatActivity {
     EditText nameInput;
@@ -61,15 +63,15 @@ public class SetInfoActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(v -> {
             // Get the user input
             String name = nameInput.getText().toString();
-            // Get other user input as needed
 
             // Create a new User object
             User user = new User(userId, phoneNumber, password, name, gender);
 
             // Save the user to Firebase
-            FirebaseDatabase.getInstance().getReference("Users")
-                    .child(userId)
-                    .setValue(user)
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("Users")
+                    .document(userId)
+                    .set(user)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Create a new UserSQLite object
@@ -89,6 +91,10 @@ public class SetInfoActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(SetInfoActivity.this, "Lưu thông tin thất bại", Toast.LENGTH_SHORT).show();
                         }
+                    })
+                    .addOnFailureListener(e -> {
+                        // Log the error
+                        Log.e("SetInfoActivity", "Failed to save user to Firestore: ", e);
                     });
         });
     }

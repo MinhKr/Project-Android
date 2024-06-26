@@ -36,10 +36,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageActivity extends AppCompatActivity {
-    CircleImageView profile_image;
     TextView username;
     FirebaseUser fuser;
     DatabaseReference reference;
