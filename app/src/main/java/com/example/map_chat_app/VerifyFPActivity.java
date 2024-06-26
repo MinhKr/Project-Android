@@ -23,7 +23,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class VerifyActivity extends AppCompatActivity {
+public class VerifyFPActivity extends AppCompatActivity {
 
     EditText otpInput;
 
@@ -33,12 +33,14 @@ public class VerifyActivity extends AppCompatActivity {
     Button verifyBtn;
     FirebaseAuth mAuth;
 
-    String  phoneNumber, password , email , phoneNumberNoCountryCode;
+    String phoneNumber , phoneNumberNoCountryCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_verify);
+        setContentView(R.layout.activity_verify_fpactivity);
+
         otpInput = findViewById(R.id.input_txt_otp);
         verifyBtn = findViewById(R.id.verify_btn);
         resendOtpTxt = findViewById(R.id.resend_otp);
@@ -47,15 +49,13 @@ public class VerifyActivity extends AppCompatActivity {
 
         phoneNumber = getIntent().getStringExtra("phoneNumber");
         phoneNumberNoCountryCode = getIntent().getStringExtra("phoneNumberNoCountryCode");
-        password = getIntent().getStringExtra("password");
-        email = getIntent().getStringExtra("email");
 
         SendOTP(phoneNumber , false);
 
         verifyBtn.setOnClickListener(v -> {
             String otp = otpInput.getText().toString();
             if(otp.isEmpty()){
-                Toast.makeText(VerifyActivity.this,"Vui lòng nhập mã OTP", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VerifyFPActivity.this,"Vui lòng nhập mã OTP", Toast.LENGTH_SHORT).show();
             }else{
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCode, otp);
                 signIn(credential);
@@ -65,6 +65,7 @@ public class VerifyActivity extends AppCompatActivity {
         resendOtpTxt.setOnClickListener(v -> {
             SendOTP(phoneNumber , true);
         });
+
     }
 
     void SendOTP(String phoneNumber , boolean isResend){
@@ -82,7 +83,7 @@ public class VerifyActivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(VerifyActivity.this,"Xác minh thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VerifyFPActivity.this,"Xác minh thất bại", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -90,7 +91,7 @@ public class VerifyActivity extends AppCompatActivity {
                                 super.onCodeSent(s, forceResendingToken);
                                 verificationCode = s;
                                 resendingToken = forceResendingToken;
-                                Toast.makeText(VerifyActivity.this,"Mã OTP đã được gửi", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(VerifyFPActivity.this,"Mã OTP đã được gửi", Toast.LENGTH_SHORT).show();
                             }
                         });          // OnVerificationStateChangedCallbacks
 
@@ -109,18 +110,17 @@ public class VerifyActivity extends AppCompatActivity {
                         // Xác minh thành công
                         FirebaseUser user = task.getResult().getUser();
 
-                        Toast.makeText(VerifyActivity.this, "Xác minh thành công", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(VerifyActivity.this, SetInfoActivity.class);
+                        Toast.makeText(VerifyFPActivity.this, "Xác minh thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(VerifyFPActivity.this, ResetPasswordActivity.class);
                         intent.putExtra("userId", user.getUid());
                         intent.putExtra("phoneNumber", phoneNumber);
                         intent.putExtra("phoneNumberNoCountryCode", phoneNumberNoCountryCode);
-                        intent.putExtra("password", password);
 
                         startActivity(intent);
                         finish();
                     } else {
                         // Xác minh thất bại
-                        Toast.makeText(VerifyActivity.this,"Xác minh thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VerifyFPActivity.this,"Xác minh thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

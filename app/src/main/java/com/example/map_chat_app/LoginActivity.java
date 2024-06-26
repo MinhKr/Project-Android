@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText phoneNumberInput, passwordInput;
     Button btn_login;
-    TextView toRegisterActivity;
+    TextView toRegisterActivity , forgotPassword;
     FirebaseAuth mAuth;
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         toRegisterActivity = findViewById((R.id.createAcc_txt));
         phoneNumberInput = findViewById(R.id.input_txt_phonenumber);
         passwordInput = findViewById(R.id.input_txt_password);
+        forgotPassword = findViewById(R.id.forgotPass_txt);
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -94,6 +95,15 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 // Thành công
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //Quên mật khẩu
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });
