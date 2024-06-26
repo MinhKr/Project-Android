@@ -6,6 +6,7 @@ import android.database.DatabaseErrorHandler;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -53,7 +54,6 @@ public class MessageActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        recyclerView.setHasFixedSize(true);
         recyclerView = findViewById(R.id.recycleviewChat);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -66,63 +66,86 @@ public class MessageActivity extends AppCompatActivity {
         intent = getIntent();
         String userid = intent.getStringExtra("userid");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
-        if (userid != null) {
+        if (fuser != null) {
+            String userID = fuser.getUid();
+            Log.d("MessageActivity", "User ID: " + userID);
+
             reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+//        if (userid != null) {
+//            reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+//
+//        } else {
+//            // Xử lý trường hợp null, có thể là log lỗi hoặc đưa ra thông báo cho người dùng
+//            Log.e("MessageActivity", "UserID is null");
+//        }
 
-        } else {
-            // Xử lý trường hợp null, có thể là log lỗi hoặc đưa ra thông báo cho người dùng
-            Log.e("MessageActivity", "UserID is null");
-        }
-
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                username.setText(user.getName());
-                if (user != null) {
-                    username.setText(user.getName());
-                } else {
-                    Log.e("MessageActivity", "User is null");
+        if (reference != null) {
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    User user = snapshot.getValue(User.class);
+                    if (user != null) {
+                        username.setText(user.getName());
+                    } else {
+                        Log.e("MessageActivity", "User data is null");
+                    }
                 }
-//                profile_image.setImageResource(R.mipmap.ic_launcher);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("MessageActivity", "Failed to read value.", error.toException());
-            }
-        });
-        readMessages();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("MessageActivity", "Database error: " + error.getMessage());
+                }
+            });
+        } else {
+            Log.e("MessageActivity", "Database reference is null");
+        }
+    } else {
+        Log.e("MessageActivity", "User is not authenticated");
+        Toast.makeText(this, "User is not authenticated. Please login again.", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                User user = snapshot.getValue(User.class);
+//                assert user != null;
+//                username.setText(user.getName());
+//                //                profile_image.setImageResource(R.mipmap.ic_launcher);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Log.e("MessageActivity", "Failed to read value.", error.toException());
+//            }
+//        });
+        mUsers = new ArrayList<>();
+        chatAdapter = new ChatAdapter(this, mUsers);
+        if (recyclerView != null) {
+            recyclerView.setAdapter(chatAdapter);
+        }
+        // Load users into RecyclerView
+        loadUsers();
     }
 
-    private void readMessages() {
-        mUsers = new ArrayList<>();
-
-        // Đọc dữ liệu các user từ Firebase Database và đưa vào RecyclerView
+    private void loadUsers() {
         DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
         usersReference.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 mUsers.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    assert user != null;
-                    assert fuser != null;
-                    if (!user.getUserId().equals(fuser.getUid())) {
-                        mUsers.add(user);
-                    }
+                    mUsers.add(user);
                 }
-
-                chatAdapter = new ChatAdapter(MessageActivity.this, mUsers);
-                recyclerView.setAdapter(chatAdapter);
+                chatAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.e("MessageActivity", "Failed to read value.", databaseError.toException());
+                Log.e("MessageActivity", "Failed to load users: " + databaseError.getMessage());
             }
         });
     }
-
 }
+

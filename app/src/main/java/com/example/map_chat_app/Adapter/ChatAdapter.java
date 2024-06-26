@@ -57,7 +57,7 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView username;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(@NonNull View itemView){
             super(itemView);
             username = itemView.findViewById(R.id.username);
 //            profile_image = itemView.findViewById(R.id.profile_image);
