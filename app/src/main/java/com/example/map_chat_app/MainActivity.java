@@ -4,6 +4,7 @@ import static com.mapbox.maps.ImageHolder.*;
 import static com.mapbox.maps.plugin.gestures.GesturesUtils.getGestures;
 import static com.mapbox.maps.plugin.locationcomponent.LocationComponentUtils.getLocationComponent;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -26,6 +27,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.map_chat_app.Activity.MessageActivity;
 import com.mapbox.android.gestures.MoveGestureDetector;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
@@ -43,7 +45,8 @@ import com.mapbox.maps.ImageHolder;
 public class MainActivity extends AppCompatActivity {
 
     MapView mapView;
-    ImageView toMainImg;
+    ImageView toMainImg ,toChatImg;
+
     private final ActivityResultLauncher<String> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
         @Override
         public void onActivityResult(Boolean o) {
@@ -107,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
         mapView = findViewById(R.id.mapView);
         toMainImg = findViewById(R.id.toMain);
+        toChatImg = findViewById(R.id.toChat);
+        String userId = getIntent().getStringExtra("userid");
 
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != getPackageManager().PERMISSION_GRANTED){
             activityResultLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION);
@@ -141,6 +146,12 @@ public class MainActivity extends AppCompatActivity {
                     getGestures(mapView).addOnMoveListener(onMoveListener);
                 });
             }
+        });
+
+        toChatImg.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+            intent.putExtra("userid", userId);
+            startActivity(intent);
         });
 
     }

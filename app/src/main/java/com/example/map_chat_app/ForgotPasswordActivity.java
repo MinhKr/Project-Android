@@ -33,6 +33,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         phoneNumberInput = findViewById(R.id.input_txt_phonenumber);
         countryCodePicker = findViewById(R.id.ccp_login);
 
+        countryCodePicker.registerCarrierNumberEditText(phoneNumberInput);
+
         backLoginActivity.setOnClickListener(v -> {
             Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -43,7 +45,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             String phoneNumberNoCCP = phoneNumberInput.getText().toString().replace(" ", "");
 
             DBHelper dbHelper = new DBHelper(this);
-            UserSQLite user = dbHelper.getUser(phoneNumber);
+            UserSQLite user = dbHelper.getUser(phoneNumberNoCCP);
             if (user != null) {
                 // Số điện thoại tồn tại trong SQLite, chuyển đến VerifyFPActivity
                 Intent intent = new Intent(ForgotPasswordActivity.this, VerifyFPActivity.class);

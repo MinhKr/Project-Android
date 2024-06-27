@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.hbb20.CountryCodePicker;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btn_login;
     TextView toRegisterActivity , forgotPassword;
     FirebaseAuth mAuth;
+    CountryCodePicker countryCodePicker;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,10 @@ public class LoginActivity extends AppCompatActivity {
         phoneNumberInput = findViewById(R.id.input_txt_phonenumber);
         passwordInput = findViewById(R.id.input_txt_password);
         forgotPassword = findViewById(R.id.forgotPass_txt);
+        countryCodePicker = findViewById(R.id.ccp_login);
         mAuth = FirebaseAuth.getInstance();
+
+        countryCodePicker.registerCarrierNumberEditText(phoneNumberInput);
 
 
         //Ẩn hiện mật khẩu
@@ -83,6 +88,8 @@ public class LoginActivity extends AppCompatActivity {
             String phoneNumber = phoneNumberInput.getText().toString().replace(" ", "");
             String password = passwordInput.getText().toString();
 
+            String fullPhoneNumber = countryCodePicker.getFullNumberWithPlus();
+
             DBHelper dbHelper = new DBHelper(this);
             UserSQLite user = dbHelper.getUser(phoneNumber);
 
@@ -94,8 +101,20 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Mật khẩu không đúng", Toast.LENGTH_SHORT).show();
             } else {
                 // Thành công
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("Users")
+                        .whereEqualTo("phoneNumber", fullPhoneNumber)
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                String userId = task.getResult().getDocuments().get(0).getId();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("userid", userId);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(this, "Không tìm thấy người dùng trên Firestore", Toast.LENGTH_SHORT).show();
+                            }
+                        });
             }
         });
 
