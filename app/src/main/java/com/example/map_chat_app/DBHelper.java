@@ -62,4 +62,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, COLUMN_PHONE + "=?", new String[]{phoneNumber});
         db.close();
     }
+
+    public void updatePassword(String phoneNumber, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_PASSWORD, newPassword);
+        db.update(TABLE_NAME, contentValues, COLUMN_PHONE + " = ?", new String[]{phoneNumber});
+        db.close();
+    }
 }

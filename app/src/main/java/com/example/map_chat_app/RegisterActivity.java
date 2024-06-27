@@ -50,7 +50,6 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
     String passWord , rePassword , phoneNumber , phoneNumberNoCountryCode;
-    String verificationId;
     DatabaseReference databaseReference;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -173,23 +172,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void registerUser(String phoneNumber, String phoneNumberNoCountryCode, String password) {
-        mAuth.createUserWithEmailAndPassword(phoneNumberNoCountryCode, password)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                        String userId = firebaseUser.getUid();
-                        User newUser = new User();
-                        databaseReference.child(userId).setValue(newUser);
-
-                        Intent intent = new Intent(RegisterActivity.this, MessageActivity.class);
-                        intent.putExtra("userid", userId);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
     private boolean CheckPhoneNumber() {
         countryCodePicker.registerCarrierNumberEditText(phoneInput);
         // Kiểm tra số điện thoại có hợp lệ không
