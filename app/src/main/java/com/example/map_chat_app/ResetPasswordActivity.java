@@ -18,13 +18,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
     EditText passwordInput, confirmPasswordInput;
     Button changeBtn;
-    String phoneNumber , phoneNumberNoCountryCode;
+    String phoneNumber, phoneNumberNoCountryCode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,24 +44,18 @@ public class ResetPasswordActivity extends AppCompatActivity {
         setupPasswordVisibilityToggle(passwordInput);
         setupPasswordVisibilityToggle(confirmPasswordInput);
 
-
-
         changeBtn.setOnClickListener(v -> {
             String password = passwordInput.getText().toString();
             String confirmPassword = confirmPasswordInput.getText().toString();
 
-            if(CheckPassword(password , confirmPassword)){
+            if (CheckPassword(password, confirmPassword)) {
                 updatePasswordInSQLite(phoneNumberNoCountryCode, password);
-                updatePasswordInFirestore(phoneNumber, password);
+                updatePasswordInRealtimeDatabase(phoneNumber, password);
                 Toast.makeText(ResetPasswordActivity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
-
-
         });
-
-
     }
 
     // Ẩn hiện mật khẩu
@@ -81,17 +78,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
     }
 
-    // Cập nhật mật khẩu mới vào Firestore
-    private void updatePasswordInFirestore(String phoneNumber, String newPassword) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Users")
-                .whereEqualTo("phoneNumber", phoneNumber)
+    // Cập nhật mật khẩu mới vào Realtime Database
+    private void updatePasswordInRealtimeDatabase(String phoneNumber, String newPassword) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
+        dbRef.orderByChild("phoneNumber").equalTo(phoneNumber)
                 .get()
                 .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                        String userId = task.getResult().getDocuments().get(0).getId();
-                        db.collection("Users").document(userId)
-                                .update("password", newPassword);
+                    if (task.isSuccessful() && task.getResult().hasChildren()) {
+                        for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
+                            userSnapshot.getRef().child("password").setValue(newPassword);
+                        }
                     }
                 });
     }
@@ -102,10 +98,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
         dbHelper.updatePassword(phoneNumber, newPassword);
     }
 
-
     // Kiểm tra mật khẩu
-    private boolean CheckPassword(String password , String confirmPassword){
-
+    private boolean CheckPassword(String password, String confirmPassword) {
         // Kiểm tra mật khẩu không được để trống
         if (password.isEmpty()) {
             passwordInput.setError("Mật khẩu không được để trống");

@@ -45,6 +45,10 @@
             </intent-filter>-->
         </activity>
 
+        <activity
+            android:name=".Activity.FriendSearch_Activity"
+            android:exported="true" />
+
 
 
         <activity android:name=".LoginActivity"

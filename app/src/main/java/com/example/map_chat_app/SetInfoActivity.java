@@ -14,15 +14,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SetInfoActivity extends AppCompatActivity {
     EditText nameInput;
-    Button nextBtn ;
+    Button nextBtn;
     String gender;
 
-    ImageButton maleIB , fermaleIB , otherGenderIB;
+    ImageButton maleIB, fermaleIB, otherGenderIB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,26 +62,19 @@ public class SetInfoActivity extends AppCompatActivity {
         });
 
         nextBtn.setOnClickListener(v -> {
-            // Get the user input
             String name = nameInput.getText().toString();
 
-            // Create a new User object
             User user = new User(userId, phoneNumber, password, name, gender);
 
-            // Save the user to Firebase
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("Users")
-                    .document(userId)
-                    .set(user)
+            // Lưu người dùng Firebase Realtime Database
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
+            dbRef.child(userId).setValue(user)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // Create a new UserSQLite object
+                            //Lưu trong SQLite
                             UserSQLite userSQLite = new UserSQLite(phoneNumberNoCountryCode, password);
-
-                            // Get an instance of DBHelper
                             DBHelper dbHelper = new DBHelper(SetInfoActivity.this);
 
-                            // Save the user to SQLite
                             dbHelper.addUser(userSQLite);
 
                             Intent intent = new Intent(SetInfoActivity.this, FindMeActivity.class);
@@ -94,7 +88,7 @@ public class SetInfoActivity extends AppCompatActivity {
                     })
                     .addOnFailureListener(e -> {
                         // Log the error
-                        Log.e("SetInfoActivity", "Failed to save user to Firestore: ", e);
+                        Log.e("SetInfoActivity", "Failed to save user to Realtime Database: ", e);
                     });
         });
     }
