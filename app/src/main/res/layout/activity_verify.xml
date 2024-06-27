@@ -90,6 +90,13 @@
                 android:layout_gravity="center"
                 android:textSize="15dp"/>
 
+            <ProgressBar
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:indeterminateTint="@color/white"
+                android:layout_gravity="center"
+                android:id="@+id/login_progress_bar"/>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

@@ -2,8 +2,10 @@ package com.example.map_chat_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,8 @@ public class VerifyActivity extends AppCompatActivity {
     Button verifyBtn;
     FirebaseAuth mAuth;
 
+    ProgressBar progressBar;
+
     String  phoneNumber, password , email , phoneNumberNoCountryCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +46,14 @@ public class VerifyActivity extends AppCompatActivity {
         otpInput = findViewById(R.id.input_txt_otp);
         verifyBtn = findViewById(R.id.verify_btn);
         resendOtpTxt = findViewById(R.id.resend_otp);
-
+        progressBar = findViewById(R.id.login_progress_bar);
         mAuth = FirebaseAuth.getInstance();
 
         phoneNumber = getIntent().getStringExtra("phoneNumber");
         phoneNumberNoCountryCode = getIntent().getStringExtra("phoneNumberNoCountryCode");
         password = getIntent().getStringExtra("password");
         email = getIntent().getStringExtra("email");
+        progressBar.setVisibility(View.GONE);
 
         SendOTP(phoneNumber , false);
 
