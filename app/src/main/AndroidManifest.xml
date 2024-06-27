@@ -36,9 +36,10 @@
         <activity
             android:name=".SetInfoActivity"
             android:exported="true" />
+        
         <activity
 
-            android:name=".Activity.SearchUserActivity"
+            android:name=".Activity.FriendSearch_Activity"
             android:exported="true" />
 
             <!--<intent-filter>

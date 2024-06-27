@@ -1,6 +1,5 @@
 package com.example.map_chat_app.Model;
 
-
 public class User {
     public String userId;
     public String phoneNumber;
