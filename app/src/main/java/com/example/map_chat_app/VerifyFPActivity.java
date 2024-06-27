@@ -48,7 +48,7 @@ public class VerifyFPActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         phoneNumber = getIntent().getStringExtra("phoneNumber");
-        phoneNumberNoCountryCode = getIntent().getStringExtra("phoneNumberNoCountryCode");
+        phoneNumberNoCountryCode = getIntent().getStringExtra("phoneNumberNoCCP");
 
         SendOTP(phoneNumber , false);
 
@@ -114,7 +114,7 @@ public class VerifyFPActivity extends AppCompatActivity {
                         Intent intent = new Intent(VerifyFPActivity.this, ResetPasswordActivity.class);
                         intent.putExtra("userId", user.getUid());
                         intent.putExtra("phoneNumber", phoneNumber);
-                        intent.putExtra("phoneNumberNoCountryCode", phoneNumberNoCountryCode);
+                        intent.putExtra("phoneNumberNoCCP", phoneNumberNoCountryCode);
 
                         startActivity(intent);
                         finish();

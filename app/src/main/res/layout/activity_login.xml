@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
                 android:text="Nhập thông tin"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 />
 
             <View
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
                 android:text="@string/prompt_phone"
-                android:textColor="#BFBFBF"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 />
 
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
                 android:text="@string/prompt_password"
-                android:textColor="#BFBFBF"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 />
 
@@ -145,6 +145,7 @@
                 android:text="Đăng nhập"
                 app:backgroundTint="@null"
                 app:cornerRadius="32dp"
+                android:textColor="@color/white"
                 />
 
             <View

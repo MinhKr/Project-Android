@@ -37,8 +37,17 @@
             android:name=".SetInfoActivity"
             android:exported="true" />
         <activity
+
             android:name=".Activity.SearchUserActivity"
             android:exported="true" />
+
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+
+
 
 
         <activity android:name=".LoginActivity"

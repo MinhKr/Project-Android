@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg">
+    android:background="@color/black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,11 +41,11 @@
                 android:layout_height="wrap_content"
                 android:text="Không có kết quả tìm kiếm"
                 android:textAlignment="center"
-                android:textColor="#A6A6A6"
+                android:textColor="@color/white"
                 android:textSize="28dp"
                 android:layout_gravity="center_horizontal"
                 android:paddingTop="20dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </FrameLayout>
 
         <LinearLayout
