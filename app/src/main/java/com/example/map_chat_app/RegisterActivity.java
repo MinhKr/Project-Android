@@ -55,53 +55,15 @@ public class RegisterActivity extends AppCompatActivity {
         inputPassword = findViewById(R.id.input_txt_password);
         reInputPassword = findViewById(R.id.reInput_txt_password);
 
+        /*DBHelper DbHelper = new DBHelper(this);
+        DbHelper.deleteUser("999999991");*/
+
+
 
         //Ẩn hiện mật khẩu
-        inputPassword.setOnTouchListener((v, event) -> {
-            final int DRAWABLE_RIGHT = 2;
-
-            if(event.getAction() == MotionEvent.ACTION_UP) {
-                if(event.getRawX() >= (inputPassword.getRight() - inputPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    // toggle password visibility
-                    if (inputPassword.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
-                        // Show password
-                        inputPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    } else {
-                        // Hide password
-                        inputPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    }
-                    // Keep the cursor at the end of the text
-                    inputPassword.setSelection(inputPassword.getText().length());
-                    return true;
-                }
-            }
-            return false;
-        });
-
-        //Ẩn hiện mật khẩu
-        reInputPassword.setOnTouchListener((v, event) -> {
-            final int DRAWABLE_RIGHT = 2;
-
-            if(event.getAction() == MotionEvent.ACTION_UP) {
-                if(event.getRawX() >= (reInputPassword.getRight() - reInputPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    // toggle password visibility
-                    if (reInputPassword.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
-                        // Show password
-                        reInputPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    } else {
-                        // Hide password
-                        reInputPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    }
-                    // Keep the cursor at the end of the text
-                    reInputPassword.setSelection(reInputPassword.getText().length());
-                    return true;
-                }
-            }
-            return false;
-        });
-
         setupPasswordVisibilityToggle(inputPassword);
         setupPasswordVisibilityToggle(reInputPassword);
+
         //Quay trở lại đăng nhập nếu đã có tài khoản
         text_existAccout.setOnClickListener(new View.OnClickListener() {
             @Override
