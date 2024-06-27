@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 Drawable drawable = AppCompatResources.getDrawable(MainActivity.this, R.drawable.baseline_location_on_24);
                 Bitmap bitmap = convertDrawableToBitmap(drawable);
 
+
+
                 // Convert Bitmap to ImageHolder
                 ImageHolder bearingImage = from(bitmap);
 
