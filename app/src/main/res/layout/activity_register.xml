@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:alpha="0.7"
                     android:text="Nhập lại mật khẩu"
-                    android:textColor="@color/white"
+                    android:textColor="#@color/white"
                     android:textStyle="bold"
                     />
 
