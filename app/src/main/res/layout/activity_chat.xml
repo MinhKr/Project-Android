@@ -13,15 +13,34 @@
         android:padding="16dp"
         tools:context=".Activity.FriendSearch_Activity">
 
-        <SearchView
-            android:id="@+id/searchView"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="Tìm kiếm"
-            android:background="@drawable/search_view_background"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"/>
+            >
+
+            <EditText
+                android:id="@+id/search_username_input"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/search_view_background"
+                android:hint="Tìm kiếm"
+                android:iconifiedByDefault="false"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:layout_toLeftOf="@+id/search_user_btn"/>
+            <ImageButton
+                android:id="@+id/search_user_btn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/baseline_check_circle_24"
+                android:layout_margin="10dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:tint="@color/white" />
+        </RelativeLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
