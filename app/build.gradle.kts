@@ -86,6 +86,12 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.circleimageview)
+<<<<<<< HEAD
     implementation("com.google.firebase:firebase-database:20.0.5")
 }
 apply(plugin = "com.google.gms.google-services")
+=======
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.0") // Thêm thư viện này
+    implementation("com.google.maps.android:android-maps-utils:0.5+")
+}
+>>>>>>> 7c915cac9a29d9191911ff9c65be6e08de1bb872

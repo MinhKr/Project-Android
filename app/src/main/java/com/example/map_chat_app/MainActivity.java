@@ -22,6 +22,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 
+
+import com.example.map_chat_app.Activity.MessageActivity;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.ui.IconGenerator;
+
 import com.mapbox.android.gestures.MoveGestureDetector;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
@@ -35,6 +42,7 @@ import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListen
 import com.mapbox.maps.ImageHolder;
 
 public class MainActivity extends AppCompatActivity {
+
 
     MapView mapView;
     ImageView toMainImg ,toChatImg;
@@ -117,7 +125,15 @@ public class MainActivity extends AppCompatActivity {
                 LocationComponentPlugin locationComponentPlugin = getLocationComponent(mapView);
                 locationComponentPlugin.setEnabled(true);
 
+
+
                 // Convert Drawable to Bitmap
+                IconGenerator iconGen = new IconGenerator(MainActivity.this);
+                MarkerOptions markerOptions = new MarkerOptions().
+                        icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Text"))).
+                        position(new LatLng(lat from database, lon from database)).
+                        anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+
                 Drawable drawable = AppCompatResources.getDrawable(MainActivity.this, R.drawable.baseline_location_on_24);
                 Bitmap bitmap = convertDrawableToBitmap(drawable);
 
