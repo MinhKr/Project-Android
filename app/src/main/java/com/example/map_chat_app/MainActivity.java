@@ -6,11 +6,11 @@ import static com.mapbox.maps.plugin.locationcomponent.LocationComponentUtils.ge
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,16 +19,16 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 
-
-import com.example.map_chat_app.Activity.MessageActivity;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.maps.android.ui.IconGenerator;
-
 import com.mapbox.android.gestures.MoveGestureDetector;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
@@ -41,11 +41,14 @@ import com.mapbox.maps.plugin.locationcomponent.OnIndicatorBearingChangedListene
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener;
 import com.mapbox.maps.ImageHolder;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
-
     MapView mapView;
-    ImageView toMainImg ,toChatImg;
+    ImageView toMainImg, toChatImg;
+    String id; // Thêm biến id
 
     private final ActivityResultLauncher<String> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
         @Override
@@ -79,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
                             .build()
             );
             getGestures(mapView).setFocalPoint(mapView.getMapboxMap().pixelForCoordinate(point));
+
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users").child(id).child("Position");
+            Map<String, Double> position = new HashMap<>();
+            position.put("latitude", point.latitude());
+            position.put("longitude", point.longitude());
+            userRef.setValue(position);
         }
     };
 
@@ -110,13 +119,16 @@ public class MainActivity extends AppCompatActivity {
         mapView = findViewById(R.id.mapView);
         toMainImg = findViewById(R.id.toMain);
         toChatImg = findViewById(R.id.toChat);
-        String userId = getIntent().getStringExtra("userid");
 
-        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != getPackageManager().PERMISSION_GRANTED){
+        String username = getIntent().getStringExtra("username");
+        id = getIntent().getStringExtra("userId");
+
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != getPackageManager().PERMISSION_GRANTED) {
             activityResultLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION);
         }
 
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS ,new Style.OnStyleLoaded() {
+        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
                 mapView.getMapboxMap().setCamera(new CameraOptions.Builder()
@@ -125,21 +137,15 @@ public class MainActivity extends AppCompatActivity {
                 LocationComponentPlugin locationComponentPlugin = getLocationComponent(mapView);
                 locationComponentPlugin.setEnabled(true);
 
+                // Sử dụng IconGenerator để tạo Bitmap
+                IconGenerator iconGenerator = new IconGenerator(MainActivity.this);
+                TextView textView = new TextView(MainActivity.this);
+                textView.setText(""+username);
 
+                iconGenerator.setContentView(textView);
+                Bitmap bitmap = iconGenerator.makeIcon();
 
-                // Convert Drawable to Bitmap
-                IconGenerator iconGen = new IconGenerator(MainActivity.this);
-                MarkerOptions markerOptions = new MarkerOptions().
-                        icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Text"))).
-                        position(new LatLng(lat from database, lon from database)).
-                        anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
-
-                Drawable drawable = AppCompatResources.getDrawable(MainActivity.this, R.drawable.baseline_location_on_24);
-                Bitmap bitmap = convertDrawableToBitmap(drawable);
-
-
-
-                // Convert Bitmap to ImageHolder
+                // Chuyển Bitmap thành ImageHolder
                 ImageHolder bearingImage = from(bitmap);
 
                 LocationPuck2D locationPuck2D = new LocationPuck2D();
@@ -149,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
                 locationComponentPlugin.addOnIndicatorBearingChangedListener(onIndicatorBearingChangedListener);
                 getGestures(mapView).addOnMoveListener(onMoveListener);
 
+
+
                 toMainImg.setOnClickListener(v -> {
                     locationComponentPlugin.addOnIndicatorPositionChangedListener(onIndicatorPositionChangedListener);
                     locationComponentPlugin.addOnIndicatorBearingChangedListener(onIndicatorBearingChangedListener);
@@ -157,19 +165,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        toChatImg.setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+        toChatImg.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, FindFriendActivity.class);
 //            intent.putExtra("userid", userId);
-//            startActivity(intent);
-//        });
+            startActivity(intent);
+        });
 
-    }
-
-    private Bitmap convertDrawableToBitmap(Drawable drawable) {
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
     }
 }

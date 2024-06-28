@@ -14,26 +14,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hbb20.CountryCodePicker;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText phoneNumberInput, passwordInput;
     Button btn_login;
-    TextView toRegisterActivity , forgotPassword;
+    TextView toRegisterActivity, forgotPassword;
     FirebaseAuth mAuth;
     CountryCodePicker countryCodePicker;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        btn_login = (Button)findViewById(R.id.btn_login);
-        toRegisterActivity = findViewById((R.id.createAcc_txt));
+        btn_login = findViewById(R.id.btn_login);
+        toRegisterActivity = findViewById(R.id.createAcc_txt);
         phoneNumberInput = findViewById(R.id.input_txt_phonenumber);
         passwordInput = findViewById(R.id.input_txt_password);
         forgotPassword = findViewById(R.id.forgotPass_txt);
@@ -51,13 +50,12 @@ public class LoginActivity extends AppCompatActivity {
 
         countryCodePicker.registerCarrierNumberEditText(phoneNumberInput);
 
-
         //Ẩn hiện mật khẩu
         passwordInput.setOnTouchListener((v, event) -> {
             final int DRAWABLE_RIGHT = 2;
 
-            if(event.getAction() == MotionEvent.ACTION_UP) {
-                if(event.getRawX() >= (passwordInput.getRight() - passwordInput.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (passwordInput.getRight() - passwordInput.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                     // toggle password visibility
                     if (passwordInput.getTransformationMethod() == PasswordTransformationMethod.getInstance()) {
                         // Show password
@@ -74,47 +72,64 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         });
 
-        //Chưa có tài khoản
-        toRegisterActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
-            }
+        // Chưa có tài khoản
+        toRegisterActivity.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
-        //Đã có tài khoản
-        btn_login.setOnClickListener((v) -> {
+        // Đã có tài khoản
+        btn_login.setOnClickListener(v -> {
             String phoneNumber = phoneNumberInput.getText().toString().replace(" ", "");
             String password = passwordInput.getText().toString();
 
             String fullPhoneNumber = countryCodePicker.getFullNumberWithPlus();
 
+            // Giả sử bạn sử dụng SQLite để lưu trữ người dùng cục bộ
             DBHelper dbHelper = new DBHelper(this);
             UserSQLite user = dbHelper.getUser(phoneNumber);
 
             if (user == null) {
-                // Phone Number
+                // Số điện thoại không tồn tại
                 Toast.makeText(this, "Số điện thoại không tồn tại", Toast.LENGTH_SHORT).show();
             } else if (!user.getPassword().equals(password)) {
-                // Password
+                // Mật khẩu không đúng
                 Toast.makeText(this, "Mật khẩu không đúng", Toast.LENGTH_SHORT).show();
             } else {
-                // Thành công
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                // Đăng nhập thành công, tìm username từ Firebase
+                DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
+                usersRef.orderByChild("phoneNumber").equalTo(fullPhoneNumber).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                String username = userSnapshot.child("name").getValue(String.class);
+                                String id = userSnapshot.getKey();// Lấy username
+                                // Chuyển sang MainActivity với username
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("username", username);
+                                intent.putExtra("userId", id);
+                                startActivity(intent);
+                                finish(); // Kết thúc LoginActivity
+                                break; // Dừng lại sau khi tìm thấy username đầu tiên khớp
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Không tìm thấy người dùng với số điện thoại này.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.e("Firebase", "Failed to read value.", databaseError.toException());
+                    }
+                });
             }
         });
 
-        //Quên mật khẩu
-        forgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
-                startActivity(intent);
-            }
+        // Quên mật khẩu
+        forgotPassword.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         });
     }
-
-
 }
