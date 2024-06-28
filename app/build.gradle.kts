@@ -56,4 +56,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.circleimageview)
     implementation("com.firebaseui:firebase-ui-firestore:8.0.0") // Thêm thư viện này
+    implementation("com.google.maps.android:android-maps-utils:0.5+")
 }
