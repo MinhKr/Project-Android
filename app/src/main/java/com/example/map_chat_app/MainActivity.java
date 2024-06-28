@@ -10,8 +10,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
-import android.util.Log;
-import android.preference.PreferenceManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,19 +21,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 import com.example.map_chat_app.Activity.MessageActivity;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.ui.IconGenerator;
+
 import com.mapbox.android.gestures.MoveGestureDetector;
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.Style;
 import com.mapbox.maps.plugin.LocationPuck2D;
-import com.mapbox.maps.plugin.gestures.GesturesPlugin;
-import com.mapbox.maps.plugin.gestures.GesturesUtils;
 import com.mapbox.maps.plugin.gestures.OnMoveListener;
 import com.mapbox.maps.plugin.locationcomponent.LocationComponentPlugin;
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorBearingChangedListener;
@@ -43,6 +42,7 @@ import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListen
 import com.mapbox.maps.ImageHolder;
 
 public class MainActivity extends AppCompatActivity {
+
 
     MapView mapView;
     ImageView toMainImg ,toChatImg;
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                             .zoom(20.0)
                             .build()
             );
-
             getGestures(mapView).setFocalPoint(mapView.getMapboxMap().pixelForCoordinate(point));
         }
     };
@@ -126,7 +125,15 @@ public class MainActivity extends AppCompatActivity {
                 LocationComponentPlugin locationComponentPlugin = getLocationComponent(mapView);
                 locationComponentPlugin.setEnabled(true);
 
+
+
                 // Convert Drawable to Bitmap
+                IconGenerator iconGen = new IconGenerator(MainActivity.this);
+                MarkerOptions markerOptions = new MarkerOptions().
+                        icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Text"))).
+                        position(new LatLng(lat from database, lon from database)).
+                        anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+
                 Drawable drawable = AppCompatResources.getDrawable(MainActivity.this, R.drawable.baseline_location_on_24);
                 Bitmap bitmap = convertDrawableToBitmap(drawable);
 
@@ -150,11 +157,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        toChatImg.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
-            intent.putExtra("userid", userId);
-            startActivity(intent);
-        });
+//        toChatImg.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+//            intent.putExtra("userid", userId);
+//            startActivity(intent);
+//        });
 
     }
 

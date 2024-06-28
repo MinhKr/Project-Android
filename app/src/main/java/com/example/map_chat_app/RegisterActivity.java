@@ -6,39 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import android.os.Bundle;
 import android.widget.Toast;
 
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 
-import com.example.map_chat_app.Activity.MessageActivity;
-import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
-
-import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -48,6 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button registerBtn;
 
     FirebaseAuth mAuth;
+
+    DBHelper DbHelper;
 
     String passWord , rePassword , phoneNumber , phoneNumberNoCountryCode;
     DatabaseReference databaseReference;
@@ -60,8 +47,13 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         FirebaseApp.initializeApp(this);
+//        DbHelper = new DBHelper(this);
+//        DbHelper.deleteUser("0988700148");
+
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+
 
         phoneInput = findViewById(R.id.input_txt_phonenumber);
         countryCodePicker = findViewById(R.id.ccp_register);

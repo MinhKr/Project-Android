@@ -9,22 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.map_chat_app.Model.User;
+import com.example.map_chat_app.Model.Users;
 import com.example.map_chat_app.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class SearchUserRecycleAdapter extends  FirestoreRecyclerAdapter<User, SearchUserRecycleAdapter.UserModelViewHolder>{
+public class SearchUserRecycleAdapter extends  FirestoreRecyclerAdapter<Users, SearchUserRecycleAdapter.UserModelViewHolder>{
 
     public Context context;
 
-    public SearchUserRecycleAdapter(@NonNull FirestoreRecyclerOptions<User> options, Context context) {
+    public SearchUserRecycleAdapter(@NonNull FirestoreRecyclerOptions<Users> options, Context context) {
         super(options);
         this.context = context;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull UserModelViewHolder holder, int position, @NonNull User model) {
+    protected void onBindViewHolder(@NonNull UserModelViewHolder holder, int position, @NonNull Users model) {
         holder.usernameText.setText(model.getName());
     }
 
