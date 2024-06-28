@@ -34,6 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
+    DBHelper DbHelper;
+
     String passWord , rePassword , phoneNumber , phoneNumberNoCountryCode;
     DatabaseReference databaseReference;
 
@@ -45,8 +47,13 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         FirebaseApp.initializeApp(this);
+//        DbHelper = new DBHelper(this);
+//        DbHelper.deleteUser("0988700148");
+
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+
 
         phoneInput = findViewById(R.id.input_txt_phonenumber);
         countryCodePicker = findViewById(R.id.ccp_register);

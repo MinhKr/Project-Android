@@ -49,8 +49,7 @@ public class FriendSearch_Activity extends AppCompatActivity {
         items.add(new Friend("Harley",R.drawable.m));
 
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new FriendAdapter(getApplicationContext(),items));
+
 
     }
 }

@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                             .zoom(20.0)
                             .build()
             );
-
             getGestures(mapView).setFocalPoint(mapView.getMapboxMap().pixelForCoordinate(point));
         }
     };
@@ -142,11 +141,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        toChatImg.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
-            intent.putExtra("userid", userId);
-            startActivity(intent);
-        });
+//        toChatImg.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+//            intent.putExtra("userid", userId);
+//            startActivity(intent);
+//        });
 
     }
 

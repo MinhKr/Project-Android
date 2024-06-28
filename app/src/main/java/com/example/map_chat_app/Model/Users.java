@@ -1,6 +1,6 @@
 package com.example.map_chat_app.Model;
 
-public class User {
+public class Users {
     public String userId;
     public String phoneNumber;
     public String password;
@@ -8,10 +8,10 @@ public class User {
     public String gender;
 
     // Default constructor required for calls to DataSnapshot.getValue(User.class)
-    public User() {
+    public Users() {
     }
 
-    public User(String id, String phoneNumber, String password, String name, String gender) {
+    public Users(String id, String phoneNumber, String password, String name, String gender) {
         this.userId = id;
         this.phoneNumber = phoneNumber;
         this.password = password;
