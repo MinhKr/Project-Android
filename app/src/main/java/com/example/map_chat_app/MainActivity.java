@@ -23,7 +23,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.ActivityCompat;
 
 
-import com.example.map_chat_app.Activity.MessageActivity;
+
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -128,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
 
 
                 // Convert Drawable to Bitmap
-                IconGenerator iconGen = new IconGenerator(MainActivity.this);
-                MarkerOptions markerOptions = new MarkerOptions().
-                        icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Text"))).
-                        position(new LatLng(lat from database, lon from database)).
-                        anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+//                IconGenerator iconGen = new IconGenerator(MainActivity.this);
+//                MarkerOptions markerOptions = new MarkerOptions().
+//                        icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon("Text"))).
+//                        position(new LatLng(lat from database, lon from database)).
+//                        anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
 
                 Drawable drawable = AppCompatResources.getDrawable(MainActivity.this, R.drawable.baseline_location_on_24);
                 Bitmap bitmap = convertDrawableToBitmap(drawable);
