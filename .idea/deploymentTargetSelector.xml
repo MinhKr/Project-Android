@@ -13,6 +13,8 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
+<<<<<<< HEAD
+=======
       <SelectionState runConfigName="FriendSearch_Activity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
@@ -28,6 +30,7 @@
       <SelectionState runConfigName="MainActivity">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+>>>>>>> 5f1ee350899191d3498a541ec8628bd05cae9037
     </selectionStates>
   </component>
 </project>
