@@ -101,20 +101,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Mật khẩu không đúng", Toast.LENGTH_SHORT).show();
             } else {
                 // Thành công
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("Users")
-                        .whereEqualTo("phoneNumber", fullPhoneNumber)
-                        .get()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                                String userId = task.getResult().getDocuments().get(0).getId();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("userid", userId);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(this, "Không tìm thấy người dùng trên Firestore", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
