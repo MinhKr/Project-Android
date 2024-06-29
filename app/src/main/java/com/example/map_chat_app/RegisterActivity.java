@@ -47,8 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         FirebaseApp.initializeApp(this);
-//        DbHelper = new DBHelper(this);
-//        DbHelper.deleteUser("0988700148");
+        /*DbHelper = new DBHelper(this);
+        DbHelper.deleteUser("999999993");*/
 
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");

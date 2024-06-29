@@ -81,13 +81,13 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation(libs.play.services.maps)
     implementation("com.mapbox.maps:android:11.4.1")
-    implementation("com.firebaseui:firebase-ui-firestore:8.0.0") // Thêm dependency này
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.circleimageview)
     implementation("com.google.firebase:firebase-database:20.0.5")
     apply(plugin = "com.google.gms.google-services")
-    implementation("com.firebaseui:firebase-ui-firestore:8.0.0") // Thêm thư viện này
+    implementation("com.firebaseui:firebase-ui-firestore:8.0.0")
     implementation("com.google.maps.android:android-maps-utils:0.5+")
 }

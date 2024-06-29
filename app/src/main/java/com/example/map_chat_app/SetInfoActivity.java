@@ -77,7 +77,7 @@ public class SetInfoActivity extends AppCompatActivity {
 
                             dbHelper.addUser(userSQLite);
 
-                            Intent intent = new Intent(SetInfoActivity.this, FindMeActivity.class);
+                            Intent intent = new Intent(SetInfoActivity.this, LoginActivity.class);
                             intent.putExtra("name", name);
                             startActivity(intent);
                             Toast.makeText(SetInfoActivity.this, "Thông tin đã được lưu", Toast.LENGTH_SHORT).show();

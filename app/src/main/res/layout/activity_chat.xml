@@ -35,8 +35,8 @@
 
             <ImageButton
                 android:id="@+id/search_user_btn"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="10dp"
@@ -49,7 +49,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleviewChat"
             android:layout_width="match_parent"
-            android:layout_height="490dp" />
+            android:layout_height="490dp"/>
 
         <LinearLayout
             android:id="@+id/sticky_layout"
@@ -57,9 +57,12 @@
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="0dp"
-
+            android:background="@drawable/nav_bg"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            tools:ignore="ObsoleteLayoutParam"
+            android:layout_marginTop="100dp"
+            >
 
             <LinearLayout
                 android:layout_width="300dp"
@@ -77,12 +80,13 @@
                     app:srcCompat="@drawable/nav_social" />
 
                 <ImageView
+                    android:id="@+id/toMain"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_edit_text"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/nav_main1" />
+                    app:srcCompat="@drawable/location_tomain" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -91,7 +95,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/rounded_edit_text_gradient_bg"
                     android:padding="10dp"
-                    app:srcCompat="@drawable/nav_chat1" />
+                    app:srcCompat="@drawable/live_chat" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

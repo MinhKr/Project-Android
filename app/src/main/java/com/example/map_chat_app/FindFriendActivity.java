@@ -1,7 +1,9 @@
 package com.example.map_chat_app;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +35,8 @@ public class FindFriendActivity  extends AppCompatActivity {
     ArrayList<Users> list;
 
     RecyclerView recyclerView;
+
+    ImageView toChatimg;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,10 +46,22 @@ public class FindFriendActivity  extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        toChatimg = findViewById(R.id.toMain);
+
+        String username = getIntent().getStringExtra("username");
+        String id = getIntent().getStringExtra("userId");
 
         list = new ArrayList<>();
         friendAdapter = new FriendAdapter(this,list);
         recyclerView.setAdapter(friendAdapter);
+
+        //Quay về Main
+        toChatimg.setOnClickListener(v -> {
+            Intent intent = new Intent(FindFriendActivity.this, MainActivity.class);
+            intent.putExtra("username", username);
+            intent.putExtra("userId", id);
+            startActivity(intent);
+        });
 
         database.addValueEventListener(new ValueEventListener() {
             @Override

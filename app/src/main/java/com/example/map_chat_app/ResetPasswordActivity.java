@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +20,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
@@ -50,7 +53,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
             if (CheckPassword(password, confirmPassword)) {
                 updatePasswordInSQLite(phoneNumberNoCountryCode, password);
+
                 updatePasswordInRealtimeDatabase(phoneNumber, password);
+
                 Toast.makeText(ResetPasswordActivity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
                 startActivity(intent);
@@ -82,15 +87,26 @@ public class ResetPasswordActivity extends AppCompatActivity {
     private void updatePasswordInRealtimeDatabase(String phoneNumber, String newPassword) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
         dbRef.orderByChild("phoneNumber").equalTo(phoneNumber)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult().hasChildren()) {
-                        for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
-                            userSnapshot.getRef().child("password").setValue(newPassword);
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange( DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                userSnapshot.getRef().child("password").setValue(newPassword);
+                            }
+                            Log.d("Firebase", "Password updated successfully for phone number: " + phoneNumber);
+                        } else {
+                            Log.e("Firebase", "Phone number not found: " + phoneNumber);
                         }
+                    }
+
+                    @Override
+                    public void onCancelled( DatabaseError databaseError) {
+                        Log.e("Firebase", "Error updating password", databaseError.toException());
                     }
                 });
     }
+
 
     // Cập nhật mật khẩu mới vào SQLite
     private void updatePasswordInSQLite(String phoneNumber, String newPassword) {
