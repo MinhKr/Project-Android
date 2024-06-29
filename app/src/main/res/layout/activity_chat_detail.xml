@@ -21,8 +21,8 @@
             <ImageButton
                 android:id="@+id/imageView6"
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/back_w" />
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/back" />
 
             <ImageView
                 android:id="@+id/imageView10"

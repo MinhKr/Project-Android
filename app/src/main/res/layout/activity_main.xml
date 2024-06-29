@@ -76,7 +76,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_edit_text"
                 android:padding="3dp"
-                app:srcCompat="@drawable/nav_social1" />
+                app:srcCompat="@drawable/mxh" />
 
             <ImageView
                 android:id="@+id/toMain"

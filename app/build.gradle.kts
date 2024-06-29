@@ -90,4 +90,5 @@ dependencies {
     apply(plugin = "com.google.gms.google-services")
     implementation("com.firebaseui:firebase-ui-firestore:8.0.0")
     implementation("com.google.maps.android:android-maps-utils:0.5+")
+
 }

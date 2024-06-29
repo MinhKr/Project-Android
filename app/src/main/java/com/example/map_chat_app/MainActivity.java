@@ -262,22 +262,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    /*private void addPointAnnotation(MapView mapView, double longitude, double latitude, int iconResource) {
-        // Lấy AnnotationPlugin từ MapView
-        AnnotationPlugin annotationPlugin = (AnnotationPlugin) mapView.getPlugin(AnnotationPluginImpl.class);
-
-        if (annotationPlugin != null) {
-            // Tạo PointAnnotationManager
-            PointAnnotationManager pointAnnotationManager = annotationPlugin.createPointAnnotationManager(new AnnotationConfig());
-
-            // Tạo PointAnnotationOptions
-            PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
-                    .withPoint(Point.fromLngLat(longitude, latitude))
-                    .withIconImage(BitmapFactory.decodeResource(getResources(), iconResource));
-
-            // Tạo point annotation
-            pointAnnotationManager.create(pointAnnotationOptions);
-        }
-    }*/
 }
