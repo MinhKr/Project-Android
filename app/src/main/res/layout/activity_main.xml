@@ -36,6 +36,7 @@
         <LinearLayout
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -43,11 +44,10 @@
                 android:id="@+id/logout"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
                 android:background="@drawable/rounded_edit_text"
                 android:padding="1dp"
-                android:src="@drawable/logout"/>
-<!--                app:srcCompat="@drawable/avt" -->
+                android:src="@drawable/logout" />
+            <!--                app:srcCompat="@drawable/avt" -->
 
         </LinearLayout>
     </LinearLayout>
@@ -76,7 +76,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/rounded_edit_text"
                 android:padding="3dp"
-                app:srcCompat="@drawable/nav_social1" />
+                app:srcCompat="@drawable/mxh" />
 
             <ImageView
                 android:id="@+id/toMain"
