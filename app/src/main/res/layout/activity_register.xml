@@ -23,152 +23,136 @@
         app:cardCornerRadius="30dp">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="459dp"
+            android:background="@color/black"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signIn"
+                android:textColor="@color/white"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:text="Nhập thông tin"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text="@string/prompt_phone"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="459dp"
-                android:background="@color/black"
-                android:orientation="vertical"
-                android:padding="30dp"
-                >
-                <TextView
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/signIn"
-                    android:textColor="@color/white"
-                    android:textSize="32sp"
-                    android:textStyle="bold"
-                    />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.8"
-                    android:text="Nhập thông tin"
-                    android:textColor="@color/white"
-                    />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:text="@string/prompt_phone"
-                    android:textColor="@color/white"
-
-                    android:textStyle="bold"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <com.hbb20.CountryCodePicker
-                        android:id="@+id/ccp_register"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:ccp_defaultNameCode="VN"
-                        app:ccp_showNameCode="false"
-                        app:ccp_contentColor="@color/white"/>
-
-                    <EditText
-                        android:id="@+id/input_txt_phonenumber"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:hint="Nhập số điện thoại của bạn"
-                        android:textColor="@color/white"
-                        />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    />
-
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:text="@string/prompt_password"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    />
+                    app:ccp_contentColor="@color/white"
+                    app:ccp_defaultNameCode="VN"
+                    app:ccp_showNameCode="false" />
 
                 <EditText
-                    android:id="@+id/input_txt_password"
+                    android:id="@+id/input_txt_phonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:hint="Nhập mật khẩu của bạn"
-                    android:textColor="@color/white"
-                    android:inputType="textPassword"
-                    android:drawableEnd="@drawable/eye"
-                    />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.7"
-                    android:text="Nhập lại mật khẩu"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    />
-
-
-                <EditText
-                    android:id="@+id/reInput_txt_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:hint="Nhập lại mật khẩu của bạn"
-                    android:textColor="@color/white"
-                    android:inputType="textPassword"
-                    android:drawableEnd="@drawable/eye"
-                    />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"
-                    />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/register_btn"
-                    android:textColor="@color/white"
-                    android:layout_width="250dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/gradient_bg_button"
-                    android:contentDescription="Nút đăng nhập"
-                    android:gravity="center"
-                    android:text="@string/signIn"
-                    app:backgroundTint="@null"
-                    app:cornerRadius="32dp"/>
-
-
-                <TextView
-                    android:id="@+id/txt_exist_acc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:alpha="0.8"
-                    android:text="Đã có tài khoản"
-                    android:textColor="@color/white"
-                    />
-
-
+                    android:hint="Nhập số điện thoại của bạn"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text="@string/prompt_password"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/input_txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableEnd="@drawable/eye"
+                android:hint="Nhập mật khẩu của bạn"
+                android:inputType="textPassword"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text="Nhập lại mật khẩu"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/reInput_txt_password"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:drawableEnd="@drawable/eye"
+                android:hint="Nhập lại mật khẩu của bạn"
+                android:inputType="textPassword"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/register_btn"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/gradient_bg_button"
+                android:contentDescription="Nút đăng nhập"
+                android:gravity="center"
+                android:text="@string/signIn"
+                android:textColor="@color/white"
+                app:backgroundTint="@null"
+                app:cornerRadius="32dp" />
+
+
+            <TextView
+                android:id="@+id/txt_exist_acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:alpha="0.8"
+                android:text="Đã có tài khoản"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>

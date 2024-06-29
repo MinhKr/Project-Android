@@ -47,6 +47,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FindFriend
             public void onClick(View view) {
                 Intent intent = new Intent(context, ChatFriendActivity.class);
                 intent.putExtra("userId", users.getUserId());
+                intent.putExtra("username", users.getName());
                 context.startActivity(intent);
 
             }

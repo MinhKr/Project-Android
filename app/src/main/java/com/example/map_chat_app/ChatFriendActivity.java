@@ -72,6 +72,7 @@ public class ChatFriendActivity extends AppCompatActivity {
         text_send = findViewById(R.id.text_send);
         intent = getIntent();
         final String userId = intent.getStringExtra("userId");
+        final String username = intent.getStringExtra("username");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         // Xử lý sending chat với btn_send

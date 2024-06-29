@@ -36,7 +36,7 @@ public class FindFriendActivity  extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    ImageView toChatimg;
+    ImageView toMainimg;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class FindFriendActivity  extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference("Users");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        toChatimg = findViewById(R.id.toMain);
+        toMainimg = findViewById(R.id.toMain);
 
         String username = getIntent().getStringExtra("username");
         String id = getIntent().getStringExtra("userId");
@@ -56,7 +56,7 @@ public class FindFriendActivity  extends AppCompatActivity {
         recyclerView.setAdapter(friendAdapter);
 
         //Quay về Main
-        toChatimg.setOnClickListener(v -> {
+        toMainimg.setOnClickListener(v -> {
             Intent intent = new Intent(FindFriendActivity.this, MainActivity.class);
             intent.putExtra("username", username);
             intent.putExtra("userId", id);
